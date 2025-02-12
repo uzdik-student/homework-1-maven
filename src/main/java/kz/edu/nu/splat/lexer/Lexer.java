@@ -28,14 +28,10 @@ public class Lexer {
 			// <bin-op>
 			Pattern.compile("=="),
 			Pattern.compile(":="),
-			// <unary-op>
-			Pattern.compile("not"),
 			Pattern.compile("<="),
 			Pattern.compile("<"),
 			Pattern.compile(">="),
 			Pattern.compile(">"),
-			Pattern.compile("or"),
-			Pattern.compile("and"),
 			Pattern.compile(";"),
 			Pattern.compile(":"),
 			Pattern.compile(","),

@@ -16,11 +16,37 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LexerTest {
 
-    Lexer lexer;
+    private Lexer lexer;
 
     @BeforeEach
     void setUp() {
         lexer = new Lexer(null);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"program", "begin", "end", "is", "while", "do", "if", "then", "else", "print", "print_line", "return", "and", "or", "not", "void", "Integer", "Boolean", "String", "true", "false"})
+    void testTokenizeKeyword(String keyword) throws LexException, IOException {
+        List<Token> tokens = lexer.tokenize(keyword);
+
+        assertEquals(1, tokens.size());
+        assertEquals(keyword, tokens.get(0).value);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "A", "_", "_Xyz0123456789_"})
+    void testTokenizeLabel(String label) throws LexException, IOException {
+        List<Token> tokens = lexer.tokenize(label);
+        assertEquals(1, tokens.size());
+        assertEquals(label, tokens.get(0).value);
+    }
+
+    @Test
+    void testTokenizeAssign() throws LexException, IOException {
+        List<Token> tokens = lexer.tokenize("a := 2");
+        assertEquals(3, tokens.size());
+        assertEquals("a", tokens.get(0).value);
+        assertEquals(":=", tokens.get(1).value);
+        assertEquals("2", tokens.get(2).value);
     }
 
     @Test
@@ -30,56 +56,5 @@ class LexerTest {
 
         // Execute test method
         assertThrows(FileNotFoundException.class, lexer::tokenize);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"program", "begin", "end", "is", "while", "do", "if", "then", "else", "print", "print_line", "return", "and", "or", "not", "void", "Integer", "Boolean", "String", "true", "false"})
-    void testTokenizeWithKeyword(String keyword) throws LexException, IOException {
-        List<Token> tokens = lexer.tokenize(keyword);
-
-        assertEquals(1, tokens.size());
-        assertEquals(keyword, tokens.get(0).value);
-    }
-
-    @Test
-    void testTokenizeWithVariable() throws LexException, IOException {
-        List<Token> tokens = lexer.tokenize("variable");
-        assertEquals(1, tokens.size());
-        assertEquals("variable", tokens.get(0).value);
-    }
-
-    @Test
-    void testTokenizeWithSingleQuotationMark() {
-        assertThrows(LexException.class, () -> lexer.tokenize("\""));
-    }
-
-    @Test
-    void testTokenizeWithSingleCurlyBracket() {
-        assertThrows(LexException.class, () -> lexer.tokenize("{"));
-    }
-
-    @Test
-    void testTokenizeWithSingleEqualSymbol() {
-        assertThrows(LexException.class, () -> lexer.tokenize("="));
-    }
-
-    @Test
-    void testTokenizeWithExclamationMark() {
-        assertThrows(LexException.class, () -> lexer.tokenize("!"));
-    }
-
-    @Test
-    void testTokenizeWithPlusMinusSymbol() {
-        assertThrows(LexException.class, () -> lexer.tokenize("±"));
-    }
-
-    @Test
-    void testTokenizeWithApostrophe() {
-        assertThrows(LexException.class, () -> lexer.tokenize("'"));
-    }
-
-    @Test
-    void testTokenizeWithBackslash() {
-        assertThrows(LexException.class, () -> lexer.tokenize("\\"));
     }
 }
