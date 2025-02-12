@@ -2,6 +2,7 @@ package kz.edu.nu.splat.lexer;
 
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -40,7 +41,7 @@ class LexerTest {
         assertEquals(label, tokens.get(0).value);
     }
 
-    @Test
+    @RepeatedTest(5)
     void testTokenizeAssign() throws LexException, IOException {
         List<Token> tokens = lexer.tokenize("a := 2");
         assertEquals(3, tokens.size());

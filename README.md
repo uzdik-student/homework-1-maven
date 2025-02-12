@@ -7,13 +7,13 @@ Project: compiler for a simple programming language called Splat.
 
 ## Lexer
 
-Lexical analysis of splat source code
+Lexical analysis converts splat source code into the list of tokens
 
 ![alt text](src/main/resources/lexer.png)
 
 ## Parser
 
-Lexical analysis of splat source code
+Parser converts the list of tokens into the abstract syntax tree
 
 ![alt text](src/main/resources/ast.jpg)
 
