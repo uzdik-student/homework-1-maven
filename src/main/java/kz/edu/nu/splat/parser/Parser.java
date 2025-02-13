@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static kz.edu.nu.splat.parser.ParseException.DECLARATION_EXPECTED;
 import static kz.edu.nu.splat.parser.ParseException.UNEXPECTED_EOF;
 
 public class Parser {
@@ -135,7 +136,7 @@ public class Parser {
 			return parseFuncDecl();
 		} else {
 			Token tok = tokens.get(0);
-			throw new ParseException("Declaration expected", tok);
+			throw new ParseException(DECLARATION_EXPECTED, tok);
 		}
 	}
 	
