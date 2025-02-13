@@ -1,5 +1,6 @@
 package kz.edu.nu.splat;
 
+import kz.edu.nu.splat.parser.FuncDeclTest;
 import kz.edu.nu.splat.parser.VarDeclTest;
 import kz.edu.nu.splat.parser.MainProgramTest;
 import org.junit.platform.suite.api.SelectClasses;
@@ -10,7 +11,8 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @SuiteDisplayName("Parser Tests")
 @SelectClasses({
         MainProgramTest.class,
-        VarDeclTest.class
+        VarDeclTest.class,
+        FuncDeclTest.class
 })
 public class ParserTestSuite {
 }
