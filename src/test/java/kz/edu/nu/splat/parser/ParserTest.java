@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static kz.edu.nu.splat.parser.ParseException.UNEXPECTED_EOF;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
@@ -26,5 +27,14 @@ public class ParserTest {
         Parser parser = new Parser(lexer.tokenize(sourceCode));
 
         assertThrows(ParseException.class, parser::parse);
+    }
+
+    @Test
+    void testParseNotEndingWithSemicolon() throws LexException, IOException, ParseException {
+        String sourceCode = "program begin end";
+        Parser parser = new Parser(lexer.tokenize(sourceCode));
+
+        Exception exception = assertThrows(ParseException.class, parser::parse);
+        assertEquals(UNEXPECTED_EOF, exception.getMessage());
     }
 }

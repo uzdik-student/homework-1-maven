@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static kz.edu.nu.splat.parser.ParseException.UNEXPECTED_EOF;
+
 public class Parser {
 
 	/**
@@ -103,7 +105,7 @@ public class Parser {
 		// This might happen if we do a tokens.get(), and nothing is there!
 		} catch (IndexOutOfBoundsException ex) {
 			
-			throw new ParseException("Unexpectedly reached the end of file.", -1, -1);
+			throw new ParseException(UNEXPECTED_EOF, -1, -1);
 		}
 	}
 	

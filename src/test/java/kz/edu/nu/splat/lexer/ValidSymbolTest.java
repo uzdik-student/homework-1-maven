@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.io.IOException;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ValidSymbolTest {
@@ -36,7 +37,9 @@ public class ValidSymbolTest {
     void testTokenizeOpenParentheses() throws LexException, IOException {
         List<Token> tokens = lexer.tokenize("()");
         assertEquals(2, tokens.size());
-        assertEquals("(", tokens.get(0).value);
-        assertEquals(")", tokens.get(1).value);
+        assertAll(
+                () -> assertEquals("(", tokens.get(0).value),
+                () -> assertEquals(")", tokens.get(1).value)
+        );
     }
 }
