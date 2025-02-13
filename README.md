@@ -15,7 +15,7 @@ Lexical analysis converts splat source code into the list of tokens
 
 Parser converts the list of tokens into the abstract syntax tree
 
-![alt text](src/main/resources/ast.jpg)
+![alt text](src/main/resources/ast1.jpg)
 
 UML class diagrams
 
