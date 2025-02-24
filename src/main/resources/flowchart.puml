@@ -1,0 +1,31 @@
+@startuml
+skin rose
+start
+:parseExpr();
+if (tokens[0] = "(") then (Yes)
+    if (tokens[1] = "-" or\ntokens[1] = "not") then (Yes)
+        :parseUnaryExpr();
+    else (No)
+        :parseBinaryExpr();
+    endif
+else (No)
+    if (tokens[1] = "(") then (Yes)
+        :parseFuncCallExpr();
+    else (No)
+        if (tokens[0].matches("\\d+")) then (Yes)
+            :parseLiteralInt();
+        else (No)
+            if (tokens[1] = "true" or\ntokens[1] = "false" ) then (Yes)
+                :parseLiteralBool();
+            else (No)
+                if (tokens[0].startsWith("\"") and\ntokens[0].endsWith("\"")) then (Yes)
+                    :parseLiteralString();
+                else (No)
+                    :parseLabel();
+                endif
+            endif
+        endif
+    endif
+endif
+stop
+@enduml

@@ -222,7 +222,7 @@ public class Parser {
 		return params;
 	}
 
-	private Statement parseStmt() throws ParseException {
+	Statement parseStmt() throws ParseException {
 		if (peekNext("while")) {
 			return parseWhileStmt();
 		} else if (peekNext("if")) {
@@ -339,7 +339,7 @@ public class Parser {
 		return new WhileStmt(tok, condition, body);
 	}
 
-	private Expression parseExpr() throws ParseException {
+	Expression parseExpr() throws ParseException {
 		Token token = tokens.get(0);
 
 		if (peekNext(LEFT_PARENTHESIS)) {
