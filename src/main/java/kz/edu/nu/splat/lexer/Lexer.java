@@ -40,6 +40,10 @@ public class Lexer {
 			Pattern.compile("/"),
 			Pattern.compile("\\*"),
 			Pattern.compile("%"),
+			Pattern.compile("\\{"), // Mutant: Invalid token
+			Pattern.compile("}"), // Mutant: Invalid token
+			Pattern.compile("="), // Mutant: Invalid token
+			Pattern.compile("!"), // Mutant: Invalid token
 	};
 
 	private final File progFile;
